@@ -1,0 +1,360 @@
+<meta name="dash-one-writer">
+<link rel="stylesheet" href="style.css">
+<div class="fx" id="fx">
+
+  <header class="fx-head" id="resumen">
+    <div class="fx-eyebrow"><span>Finanzas personales</span><span class="dot" data-draw="hoy-txt" data-source="hoy">—</span></div>
+    <h1 class="fx-title">Mis finanzas</h1>
+    <p class="fx-lede" data-source="kpis">Tenés <b data-draw="lede-pat">—</b> de patrimonio. En lo que va del año ahorraste <b data-draw="lede-aho">—</b><span data-draw="lede-plan">—</span>. Con lo que tenés en cuentas e inversiones podrías vivir <b data-draw="lede-run">—</b> sin trabajar.</p>
+
+    <div class="fx-kpis">
+      <div class="fx-kpi">
+        <div class="lab">Patrimonio</div>
+        <div class="val dash-skeleton" data-draw="k-pat" data-source="kpis" data-field="patrimonio" data-row="0" data-fetchpriority="high">—</div>
+        <div class="sub"><span data-draw="k-pat-ref">—</span> <span data-draw="k-delta">—</span></div>
+      </div>
+      <div class="fx-kpi">
+        <div class="lab">Ahorrado este año</div>
+        <div class="val dash-skeleton" data-draw="k-aho" data-source="kpis" data-field="ahorro_anio" data-row="0">—</div>
+        <div class="sub"><span data-draw="k-plan">—</span> contra el presupuesto</div>
+      </div>
+      <div class="fx-kpi">
+        <div class="lab">Tasa de ahorro</div>
+        <div class="val dash-skeleton" data-draw="k-tasa" data-source="kpis" data-field="tasa_ahorro" data-row="0">—</div>
+        <div class="sub">de lo que entró este año</div>
+      </div>
+      <div class="fx-kpi">
+        <div class="lab">Libertad hoy</div>
+        <div class="val dash-skeleton" data-draw="k-run" data-source="kpis" data-field="runway_meses" data-row="0">—</div>
+        <div class="sub">meses sin trabajar, gastando como hasta ahora</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="fx-nav" id="fx-nav" aria-label="Secciones">
+    <button data-go="mes">Este mes</button>
+    <button data-go="anio">El año</button>
+    <button data-go="flujo">Flujo</button>
+    <button data-go="categorias">En qué se va</button>
+    <button data-go="etiquetas">Viajes</button>
+    <button data-go="cuentas">Cuentas</button>
+    <button data-go="patrimonio">Patrimonio</button>
+    <button data-go="deudas">Te deben</button>
+    <button data-go="libertad">Libertad</button>
+  </nav>
+
+  <!-- 01 Este mes -->
+  <section class="fx-sec" id="mes">
+    <div class="fx-sec-h"><span class="n">01</span><h2>Este mes</h2></div>
+    <p class="fx-sec-lede" data-draw="mes-lede" data-source="mes">—</p>
+    <div class="fx-grid">
+      <div class="fx-card" id="card-mes-gasto">
+        <div class="fx-month-top">
+          <div>
+            <div class="muted fx-cap"><span data-draw="mes-left-lab">—</span></div>
+            <div class="fx-big dash-skeleton" data-draw="mes-restante" data-source="mes" data-field="restante" data-where="categoria=Total%20gastos">—</div>
+          </div>
+          <div class="fx-right">
+            <div class="muted fx-cap">Gastado</div>
+            <div class="num fx-mid"><span data-draw="mes-gastado" data-source="mes" data-field="gastado" data-where="categoria=Total%20gastos">—</span> <span class="muted">de</span> <span data-draw="mes-presu" data-source="mes" data-field="presupuesto" data-where="categoria=Total%20gastos">—</span></div>
+          </div>
+        </div>
+        <div class="fx-track" data-draw="mes-track" data-source="mes hoy"></div>
+        <div class="fx-cats dash-skeleton" data-draw="mes-cats" data-source="mes hoy"></div>
+        <div class="fx-legend fx-legend-top">
+          <span><i class="fx-tick"></i>dónde deberías estar hoy</span>
+          <span><i style="background:var(--fx-warn)"></i>vas rápido</span>
+          <span><i style="background:var(--fx-bad)"></i>te pasaste</span>
+        </div>
+        <p class="fx-fine">Tocá una categoría para ver sus gastos del mes.</p>
+      </div>
+      <div class="fx-card" id="card-mes-ingresos">
+        <h3>Lo que entró</h3>
+        <p class="note">Cobrado este mes por categoría, con el mes anterior al lado.</p>
+        <div class="fx-big dash-skeleton" data-draw="inc-total" data-source="ingresos_mes">—</div>
+        <div class="fx-inc dash-skeleton" data-draw="inc-rows" data-source="ingresos_mes"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 El año -->
+  <section class="fx-sec" id="anio">
+    <div class="fx-sec-h"><span class="n">02</span><h2>El año, mes a mes</h2></div>
+    <p class="fx-sec-lede" data-draw="anio-lede" data-source="mensual">—</p>
+    <div class="fx-card" id="card-mensual">
+      <div class="fx-card-head">
+        <div><h3>Ingresos y gastos</h3><p class="note">Desde el primer mes con movimientos. Tocá un mes para ver sus gastos.</p></div>
+        <div class="fx-legend"><span><i style="background:var(--fx-in)"></i>Ingresos</span><span><i style="background:var(--fx-n2)"></i>Gastos</span><span><i style="background:var(--fx-grandes)"></i>de eso, compras grandes</span></div>
+      </div>
+      <div class="fx-chart dash-skeleton" id="ch-mensual" data-draw="ch-mensual" data-source="mensual" style="min-height:280px"></div>
+    </div>
+    <div class="fx-grid">
+      <div class="fx-card" id="card-acum">
+        <div class="fx-card-head">
+          <div><h3>Ahorro acumulado</h3><p class="note">Lo ahorrado hasta cada mes, contra lo presupuestado.</p></div>
+          <div class="fx-legend"><span><i class="line" style="background:var(--fx-save)"></i>Real</span><span><i class="dash"></i>Presupuesto</span></div>
+        </div>
+        <div class="fx-chart dash-skeleton" id="ch-acum" data-draw="ch-acum" data-source="mensual" style="min-height:240px"></div>
+      </div>
+      <div class="fx-card" id="card-resultado">
+        <h3>Resultado de cada mes</h3>
+        <p class="note">Ingresos menos gastos. Arriba de la línea ahorraste; abajo, gastaste más de lo que entró.</p>
+        <div class="fx-chart dash-skeleton" id="ch-resultado" data-draw="ch-resultado" data-source="mensual" style="min-height:240px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Flujo -->
+  <section class="fx-sec" id="flujo">
+    <div class="fx-sec-h"><span class="n">03</span><h2>Por dónde fluye la plata</h2></div>
+    <p class="fx-sec-lede" data-draw="flujo-lede" data-source="flujos">—</p>
+    <div class="fx-card" id="card-flujo">
+      <div class="fx-card-head">
+        <div class="fx-seg" id="flujo-modo" role="tablist" aria-label="Período">
+          <button data-modo="anio" class="on" role="tab" aria-selected="true">Año</button>
+          <button data-modo="promedio" role="tab" aria-selected="false">Mes promedio</button>
+          <button data-modo="mes" role="tab" aria-selected="false">Un mes</button>
+        </div>
+        <span class="muted fx-cap">Tocá un bloque para ver sus movimientos.</span>
+      </div>
+      <div class="fx-months" data-draw="flujo-meses" data-source="mensual" hidden></div>
+      <div class="fx-flow-sum" data-draw="flujo-sum" data-source="flujos"></div>
+      <div class="fx-chart fx-sankey dash-skeleton" id="ch-sankey" data-draw="ch-sankey" data-source="flujos" style="min-height:420px"></div>
+    </div>
+  </section>
+
+  <!-- 04 Categorías -->
+  <section class="fx-sec" id="categorias">
+    <div class="fx-sec-h"><span class="n">04</span><h2>En qué se va la plata</h2></div>
+    <p class="fx-sec-lede" data-draw="cat-lede" data-source="categorias_anio">—</p>
+    <div class="fx-grid">
+      <div class="fx-card" id="card-cats">
+        <h3>Lo gastado en el año, por categoría</h3>
+        <p class="note">La marca vertical es el presupuesto hasta hoy. Tocá una categoría para ver sus gastos.</p>
+        <div class="fx-chart fx-hbars dash-skeleton" id="ch-cats" data-draw="ch-cats" data-source="categorias_anio" style="min-height:330px"></div>
+      </div>
+      <div class="fx-card" id="card-heat">
+        <h3>Mes por mes</h3>
+        <p class="note">Cada fila se pinta contra sí misma: más oscuro, más gasto en esa categoría.</p>
+        <div class="fx-chart fx-heat dash-skeleton" id="ch-heat" data-draw="ch-heat" data-source="categorias_anio mensual" style="min-height:330px"></div>
+      </div>
+    </div>
+    <div class="fx-card fx-mt" id="card-movs">
+      <h3>Los gastos más grandes del año</h3>
+      <p class="note">Los 15 más grandes, sin contar compras grandes. Cada monto es tu parte: lo compartido entra por lo que te toca.</p>
+      <div class="fx-tablewrap">
+        <table class="fx-table" id="tbl-movs" data-source="movimientos" data-row-key="id">
+          <thead><tr>
+            <th data-field="fecha">Fecha</th>
+            <th data-field="descripcion">Descripción</th>
+            <th data-field="categoria" class="hide-sm">Categoría</th>
+            <th data-field="compartido_con" class="hide-sm">Con</th>
+            <th data-field="cuenta" class="hide-sm">Cuenta</th>
+            <th data-field="mi_parte" class="r">Tu parte</th>
+          </tr></thead>
+          <tbody data-draw="tbl-movs"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Viajes y etiquetas -->
+  <section class="fx-sec" id="etiquetas">
+    <div class="fx-sec-h"><span class="n">05</span><h2>Viajes y etiquetas</h2></div>
+    <p class="fx-sec-lede" data-draw="etq-lede" data-source="etiquetas">—</p>
+    <div class="fx-trip-stats">
+      <div class="fx-kpi"><div class="lab">En total</div><div class="val" data-draw="etq-total" data-source="etiquetas">—</div><div class="sub" data-draw="etq-count">—</div></div>
+      <div class="fx-kpi"><div class="lab">Del gasto del año</div><div class="val" data-draw="etq-share" data-source="etiquetas mensual">—</div><div class="sub">sin compras grandes</div></div>
+      <div class="fx-kpi"><div class="lab">Por etiqueta, en promedio</div><div class="val" data-draw="etq-prom" data-source="etiquetas">—</div><div class="sub" data-draw="etq-top">—</div></div>
+    </div>
+    <div class="fx-card" id="card-etq">
+      <h3>Cada etiqueta</h3>
+      <p class="note">Lo que costó cada viaje o proyecto, del primer al último gasto. Tocá uno para ver sus movimientos.</p>
+      <div class="fx-trips dash-skeleton" data-draw="etq-rows" data-source="etiquetas"></div>
+    </div>
+  </section>
+
+  <!-- 06 Cuentas -->
+  <section class="fx-sec" id="cuentas">
+    <div class="fx-sec-h"><span class="n">06</span><h2>Dónde está la plata</h2></div>
+    <p class="fx-sec-lede" data-draw="cta-lede" data-source="cuentas">—</p>
+    <div class="fx-card" id="card-cuentas">
+      <div class="fx-card-head">
+        <div><h3>Cuentas</h3><p class="note">Saldo de hoy: el último que cargaste más lo que se movió después.</p></div>
+        <div class="fx-right"><div class="muted fx-cap">Total en cuentas</div><div class="fx-big" data-draw="cta-total" data-source="kpis" data-field="liquido" data-row="0">—</div></div>
+      </div>
+      <div class="fx-tablewrap fx-tall">
+        <table class="fx-table fx-acc" id="tbl-cuentas" data-source="cuentas" data-row-key="cuenta">
+          <thead><tr>
+            <th data-field="cuenta">Cuenta</th>
+            <th data-field="moneda" class="hide-sm">Moneda</th>
+            <th data-field="saldo" class="r hide-sm">En su moneda</th>
+            <th data-field="saldo_base" class="r">En moneda base</th>
+            <th data-field="fecha" class="hide-sm">Último saldo</th>
+            <th data-field="dif" class="r hide-sm">Cuadre</th>
+          </tr></thead>
+          <tbody data-draw="tbl-cuentas"></tbody>
+        </table>
+      </div>
+      <p class="fx-fine">Cuadre: lo que no cerró la última vez que cargaste un saldo. Si no da cero, faltan o sobran movimientos entre los dos últimos saldos.</p>
+    </div>
+  </section>
+
+  <!-- 07 Patrimonio -->
+  <section class="fx-sec" id="patrimonio">
+    <div class="fx-sec-h"><span class="n">07</span><h2>Patrimonio e inversiones</h2></div>
+    <p class="fx-sec-lede" data-draw="pat-lede" data-source="kpis">—</p>
+    <div class="fx-card" id="card-stack">
+      <div class="fx-card-head">
+        <div><h3>De qué está hecho</h3><p class="note">Todo lo que tenés, más lo que te deben.</p></div>
+        <div class="fx-right"><div class="muted fx-cap">Patrimonio</div><div class="fx-big" data-draw="pat-total" data-source="kpis" data-field="patrimonio" data-row="0">—</div></div>
+      </div>
+      <div class="fx-stack" data-draw="pat-stack" data-source="kpis"></div>
+      <div class="fx-stack-leg" data-draw="pat-leg" data-source="kpis"></div>
+    </div>
+    <div class="fx-grid">
+      <div class="fx-card" id="card-pat-hist">
+        <h3>Cómo creció</h3>
+        <p class="note">El patrimonio en cada cierre de mes, y hoy.</p>
+        <div class="fx-chart dash-skeleton" id="ch-pat" data-draw="ch-pat" data-source="patrimonio_hist" style="min-height:240px"></div>
+      </div>
+      <div class="fx-card" id="card-activos">
+        <h3>Cada activo</h3>
+        <p class="note">Lo invertido, lo que vale hoy y la ganancia o pérdida.</p>
+        <div class="fx-tablewrap fx-tall fx-flat">
+          <table class="fx-table" id="tbl-activos" data-source="activos" data-row-key="activo">
+            <thead><tr>
+              <th data-field="activo">Activo</th>
+              <th data-field="tipo" class="hide-sm">Tipo</th>
+              <th data-field="invertido" class="r hide-sm">Invertido</th>
+              <th data-field="valor" class="r">Valor</th>
+              <th data-field="ganancia_pct" class="r">Ganancia</th>
+            </tr></thead>
+            <tbody data-draw="tbl-activos"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 Deudas -->
+  <section class="fx-sec" id="deudas">
+    <div class="fx-sec-h"><span class="n">08</span><h2>Quién te debe</h2></div>
+    <p class="fx-sec-lede" data-draw="deu-lede" data-source="personas">—</p>
+    <div class="fx-card" id="card-deudas">
+      <div class="fx-card-head">
+        <div><h3>Saldo con cada persona</h3><p class="note">Gastos compartidos y pagos entre ustedes. Positivo: te deben.</p></div>
+        <div class="fx-right"><div class="muted fx-cap">Neto a cobrar</div><div class="fx-big" data-draw="deu-total" data-source="kpis" data-field="te_deben" data-row="0">—</div></div>
+      </div>
+      <div class="fx-debts dash-skeleton" data-draw="deu-rows" data-source="personas"></div>
+    </div>
+  </section>
+
+  <!-- 09 Libertad -->
+  <section class="fx-sec" id="libertad">
+    <div class="fx-sec-h"><span class="n">09</span><h2>Libertad financiera</h2></div>
+    <p class="fx-sec-lede">Cuánto necesitás para que trabajar sea una opción y no una obligación. Cuenta solo la plata que puede rendir: cuentas e inversiones.</p>
+    <div class="fx-free" id="card-libertad">
+      <div class="fx-free-hero">
+        <div>
+          <div class="q">Si mañana dejás de trabajar</div>
+          <div class="a" data-draw="f-runway" data-source="kpis">—</div>
+          <div class="s" data-draw="f-runway-s">—</div>
+        </div>
+        <div>
+          <div class="q">Lo que tu plata te paga hoy, para siempre</div>
+          <div class="a" data-draw="f-renta" data-source="kpis">—</div>
+          <div class="s" data-draw="f-renta-s">—</div>
+        </div>
+        <div>
+          <div class="q">Cada mes que trabajás te compra</div>
+          <div class="a" data-draw="f-compra" data-source="kpis" data-field="meses_por_mes" data-row="0">—</div>
+          <div class="s">meses de vida, al ritmo de ahorro y gasto de este año.</div>
+        </div>
+      </div>
+      <div class="fx-controls">
+        <div class="fx-ctl">
+          <label for="c-gasto"><span>Gasto por mes que querés cubrir</span><b data-draw="c-gasto-v">—</b></label>
+          <input type="range" id="c-gasto" min="200" max="10000" step="50">
+          <div class="hint">Arranca en tu promedio de los meses cerrados, sin compras grandes: <span data-draw="c-gasto-def" data-source="kpis" data-field="gasto_mes" data-row="0">—</span>.</div>
+        </div>
+        <div class="fx-ctl">
+          <label for="c-ahorro"><span>Ahorro por mes desde hoy</span><b data-draw="c-ahorro-v">—</b></label>
+          <input type="range" id="c-ahorro" min="0" max="10000" step="50">
+          <div class="hint">Arranca en tu promedio: <span data-draw="c-ahorro-def" data-source="kpis" data-field="ahorro_mes" data-row="0">—</span>.</div>
+        </div>
+        <div class="fx-ctl">
+          <label for="c-ret"><span>Rendimiento real por año</span><b data-draw="c-ret-v">—</b></label>
+          <input type="range" id="c-ret" min="0" max="8" step="0.5" value="5">
+          <div class="hint">Después de inflación. Un índice global rindió alrededor de 5% real en el largo plazo.</div>
+        </div>
+        <div class="fx-ctl">
+          <label for="c-swr"><span>Retiro anual</span><b data-draw="c-swr-v">—</b></label>
+          <input type="range" id="c-swr" min="2.5" max="5" step="0.25" value="4">
+          <div class="hint">La regla del 4%: retirar eso por año aguantó 30 años en casi todos los escenarios históricos. 3,5% es más prudente para retiros largos.</div>
+        </div>
+      </div>
+      <div class="fx-target">
+        <div><div class="k">Tu número de libertad</div><div class="big" data-draw="f-numero">—</div></div>
+        <div class="fx-right"><div class="k">Llegás en</div><div class="big" data-draw="f-anios">—</div></div>
+        <div class="fx-prog" data-draw="f-prog"></div>
+        <div class="k" data-draw="f-prog-l">—</div><div class="k fx-right" data-draw="f-prog-r">—</div>
+      </div>
+      <div class="fx-chart dash-skeleton fx-mt" id="ch-libertad" data-draw="ch-libertad" data-source="kpis" style="min-height:260px"></div>
+      <p class="fx-fine">Es una cuenta, no un consejo de inversión. Todo en moneda de hoy: el rendimiento es después de inflación, así que el número no hay que ajustarlo. No incluye impuestos.</p>
+    </div>
+  </section>
+
+  <!-- Fuente -->
+  <section class="fx-sec fx-src" id="fuente">
+    <div class="fx-card">
+      <h3>De qué planilla lee</h3>
+      <p class="note">Todo sale en vivo de una copia de la plantilla, con tu propia conexión a Google Sheets. Pegá el link de tu planilla para ver la tuya.</p>
+      <div class="fx-src-row">
+        <input type="text" id="src-input" placeholder="https://docs.google.com/spreadsheets/d/…" aria-label="Link o ID de tu planilla" autocomplete="off" spellcheck="false">
+        <button class="fx-chip" id="src-go">Usar esta planilla</button>
+        <button class="fx-chip" id="src-reset">Volver a la demo</button>
+      </div>
+      <p class="fx-fine" id="src-bad" hidden>Ese link no parece de una planilla de Google Sheets.</p>
+    </div>
+  </section>
+
+  <div class="fx-drawer" id="fx-drawer" hidden>
+    <aside class="fx-panel" id="fx-panel" role="dialog" aria-labelledby="pnl-title">
+      <div class="fx-panel-head">
+        <div class="fx-minw0">
+          <div class="fx-panel-eyebrow" data-draw="pnl-eyebrow">—</div>
+          <h3 id="pnl-title" data-draw="pnl-title">—</h3>
+        </div>
+        <button class="fx-x" id="pnl-close" aria-label="Cerrar">×</button>
+      </div>
+      <div class="fx-panel-nav">
+        <button class="fx-chip" id="pnl-prev" aria-label="Mes anterior">‹</button>
+        <span class="fx-panel-period" data-draw="pnl-period">—</span>
+        <button class="fx-chip" id="pnl-next" aria-label="Mes siguiente">›</button>
+        <button class="fx-chip fx-push" id="pnl-year">Todo el año</button>
+        <button class="fx-chip fx-push" id="pnl-month" hidden>Ver por mes</button>
+      </div>
+      <div class="fx-panel-stats" data-draw="pnl-stats" data-source="movimientos"></div>
+      <div class="fx-panel-tools">
+        <input type="search" id="pnl-q" placeholder="Buscar comercio, cuenta o nota" aria-label="Buscar en los movimientos">
+        <div class="fx-seg" id="pnl-orden" role="tablist" aria-label="Ordenar"><button data-o="fecha" class="on" role="tab" aria-selected="true">Fecha</button><button data-o="monto" role="tab" aria-selected="false">Monto</button></div>
+      </div>
+      <p class="fx-fine fx-m0" data-draw="pnl-note">—</p>
+      <div class="fx-panel-list">
+        <table class="fx-table" id="tbl-pnl" data-source="movimientos" data-row-key="id">
+          <thead><tr>
+            <th data-field="fecha">Fecha</th>
+            <th data-field="descripcion">Movimiento</th>
+            <th data-field="mi_parte" class="r">Tu parte</th>
+          </tr></thead>
+          <tbody data-draw="pnl-list"></tbody>
+        </table>
+      </div>
+    </aside>
+  </div>
+  <div class="fx-tip" data-draw="tip" role="tooltip">—</div>
+</div>
+<script src="loaders.js"></script>
+<script src="calcs.js"></script>
+<script src="app.js"></script>

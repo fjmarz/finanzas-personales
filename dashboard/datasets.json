@@ -1,0 +1,169 @@
+{
+  "params": {
+    "planilla": "ID_DE_TU_PLANILLA"
+  },
+  "datasets": {
+    "activos": {
+      "title": "Inversiones y bienes",
+      "description": "Cada activo con lo invertido, su valor de hoy y la ganancia. Pestaña Activos.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Activos!A1:K200"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    },
+    "categorias": {
+      "title": "Categorías y presupuesto",
+      "description": "Las categorías de Config con su tipo, presupuesto mensual, ritmo y qué entra en cada una.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Config!B14:F33"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    },
+    "cierres": {
+      "title": "Cierres mensuales",
+      "description": "La foto del patrimonio al final de cada mes. Pestaña Cierres.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Cierres!A1:H300"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    },
+    "cuentas": {
+      "title": "Saldos de cuentas",
+      "description": "El saldo de hoy de cada cuenta, en su moneda y en la moneda base, con el último cuadre. Pestaña Patrimonio.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Patrimonio!B9:I29"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    },
+    "hoy": {
+      "title": "Fecha de hoy",
+      "description": "El mes y el día de hoy, del encabezado de la pestaña Inicio.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Inicio!B3"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    },
+    "monedas": {
+      "title": "Tipos de cambio",
+      "description": "Cuánto vale cada moneda en la moneda base, según Config.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Config!B62:C71"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    },
+    "movimientos": {
+      "title": "Movimientos",
+      "description": "Cada gasto, ingreso, transferencia, inversión y pago a persona de la planilla.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Movimientos!A1:R2000"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    },
+    "parametros": {
+      "title": "Moneda base",
+      "description": "La moneda base y la moneda de referencia elegidas en Config.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Config!B6:C7"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    },
+    "personas": {
+      "title": "Saldo con cada persona",
+      "description": "Cuánto te debe o le debés a cada persona. Pestaña Patrimonio.",
+      "source": {
+        "kind": "call",
+        "connector": "Google Sheets",
+        "tool": "get_values",
+        "args": {
+          "spreadsheetId": "{{planilla}}",
+          "range": "Patrimonio!K9:L29"
+        },
+        "rules": {
+          "planilla": {
+            "pattern": "^[A-Za-z0-9_-]{25,60}$"
+          }
+        }
+      }
+    }
+  }
+}
